@@ -27,8 +27,12 @@ namespace LeaderboardPlayersAPI.Controllers
             var response = _leaderBoardService.SelectAll();
             if (response.StatusCode == HttpStatusCode.NoContent) {
                 return StatusCode((int)response.StatusCode);
+                // return NoContent();
             }
             return StatusCode((int)response.StatusCode, response);
+            // Another option would be:
+            // return Ok(response.data);
+            // My question is why you choosed to create different class?
         }
 
         [HttpGet]
