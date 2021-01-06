@@ -18,7 +18,7 @@ namespace LeaderboardPlayersAPI
 
         public int getNumberOfElements() {
             var playersList = this.SelectAll().Result;
-            return playersList.Count;   
+            return playersList.Count; 
         }
 
         public async Task<bool> Insert(string key,string value) {
@@ -26,18 +26,30 @@ namespace LeaderboardPlayersAPI
             var dataRetrived = Select(key).Result;
 
             return await db.StringSetAsync(key, value);
+            // this is a bad choice of data structure, a more suitable option would be SortedSet. 
+            // Values would be ordered as required and, wouldn't be necessary to do an Keys operation to recover the whole set.
+            // Also, it would be possible to return the rank of the player.
+            
+            // return await db.SortedSetAdd("leaderboard", key, value);
         }
 
         public async Task<string> Select(string key)
         {
             var db = _connectionMultiplexer.GetDatabase();
             return await db.StringGetAsync(key);
+            
         }
 
         public async Task<List<string>> SelectAll()
         {
             EndPoint endPoint = _connectionMultiplexer.GetEndPoints().First();
             List<RedisKey> keys = _connectionMultiplexer.GetServer(endPoint).Keys(pattern: "*").ToList();
+            // This isn't scalable and is only necessary because the decision to use StringSet instead of SortedSet.
+            // Also, another workaround to avoid using the Keys operation would be creating and index using an Set to sava all the keys.
+            
+            // db.SetAdd("leaderboard:index",key); -> this should be added on the Insert method.
+            
+            // _connectionMultiplexer.GetServer(endPoint).SetMembers("leaderboard:index").ToList(); -> returning all keys.
             
             List<string> allData = new List<string>();
             foreach (var key in keys)
@@ -56,6 +68,7 @@ namespace LeaderboardPlayersAPI
             }
 
             return await Insert(key, value);
+            // This is not necessary since redis is an Key/Value Database if the key doens't exists it create a new one, and if it exists redis will update it.
         }
 
         public async Task<bool> Delete(string key) {
