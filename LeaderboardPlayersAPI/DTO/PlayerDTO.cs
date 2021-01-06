@@ -26,6 +26,23 @@ namespace LeaderboardPlayersAPI.DTO
                 points = player.points
             };
         }
-
+        
+        // Not necessary but an different way of doing the same thing. 
+        // Also, you could use implict operators. But be carefull because they hide the parsing. 
+        // Only use it when parsing won't affect the data
+        
+        // public static explict operator Player(PlayerDto dtoPlayer)
+        //     => new Player()
+        //     {
+        //         nickname = dtoPlayer.nickname,
+        //         points = dtoPlayer.points
+        //     };
+           
+        //public static explict operator PlayerDTO(Player player)
+        //     => new PlayerDTO()
+        //     {
+        //         nickname = player.nickname,
+        //         points = player.points
+        //     };
     }
 }
