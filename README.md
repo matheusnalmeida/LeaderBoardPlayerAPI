@@ -31,12 +31,21 @@
 
 ## Usabilidade
 
-> Inicialmente é necessário rodar o redis localmente na porta padrão(**localhost:6379**). Caso queira rodar em outra porta será necessário alterar a variavel RedisConnection no arquivo de configuração **appsettings.json**. Tendo isso configurado somente será executar a api ou pelo visual studio ou rodando o comando **dotnet watch run** dentro da pasta **LeaderBoardPlayersAPI**.
+> Inicialmente é necessário rodar o redis localmente na porta padrão(**localhost:6379**). Caso queira rodar em outra porta será necessário alterar a variavel RedisConnection no arquivo de configuração **appsettings.json**. Tendo isso configurado somente será executar a api ou pelo visual studio ou rodando o comando **dotnet watch run** dentro da pasta **LeaderBoardPlayersAPI**. Para chamar a requisição, por padrão a api estará rodando com a url **https://localhost:5001/LeaderBoard**.
 
 ## Documentação do postman
 
 - Link de documentação do postman para os endpoints da api: https://documenter.getpostman.com/view/12304172/TVzLpgCM
 
+## Rotas
+
+- Existem 5 rotas principais descritas na api do postman sendo elas resumidamente
+
+   1 - ListLeaderBoard: Listagem de todos os jogadores na ordem por pontuação.<br>
+   2 - InsertPlayer: Insere um jogador e retorna o mesmo inserindo com seu respectivo id.<br>
+   3 - GetPlayer:Retorna um dado jogador que possua o id especificado.<br>
+   4 - EditPlayer: Edita um dado jogador que possua o id especificado.<br>
+   5 - DeletePlayer: Deleta um jogador que possua o id especificado.<br>
 
 ## Autor
 
