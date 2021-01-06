@@ -28,7 +28,7 @@ namespace LeaderboardPlayersAPI.Services
             var deserializedPlayer = JsonConvert.SerializeObject(player);
             var isInserted = _redisManager.Insert(player.id.ToString(), deserializedPlayer).Result;
             if (!isInserted) {
-                return new ServiceResponse<Player>
+                return new ServiceResponse<Player> // This should be done on the Application layer wich is the controller. 
                 {
                     StatusCode = HttpStatusCode.BadRequest,
                     Retorno = player,
@@ -36,7 +36,7 @@ namespace LeaderboardPlayersAPI.Services
                 };
             }
 
-            return new ServiceResponse<Player>
+            return new ServiceResponse<Player> // This should be done on the Application layer wich is the controller.
             {
                 StatusCode = HttpStatusCode.OK,
                 Retorno = player,
@@ -48,7 +48,7 @@ namespace LeaderboardPlayersAPI.Services
         {
             if (string.IsNullOrWhiteSpace(id.ToString()))
             {
-                return new ServiceResponse<Player>
+                return new ServiceResponse<Player> // This should be done on the Application layer wich is the controller.
                 {
                     StatusCode = HttpStatusCode.BadRequest,
                     Retorno = null,
@@ -59,7 +59,7 @@ namespace LeaderboardPlayersAPI.Services
             var playerFound = _redisManager.Select(id.ToString()).Result;
             if (string.IsNullOrEmpty(playerFound))
             {
-                return new ServiceResponse<Player>
+                return new ServiceResponse<Player> // This should be done on the Application layer wich is the controller.
                 {
                     StatusCode = HttpStatusCode.BadRequest,
                     Retorno = null,
@@ -68,7 +68,7 @@ namespace LeaderboardPlayersAPI.Services
             }
 
             var playerDeserialized = JsonConvert.DeserializeObject<Player>(playerFound);
-            return new ServiceResponse<Player>
+            return new ServiceResponse<Player> // This should be done on the Application layer wich is the controller.
             {
                 StatusCode = HttpStatusCode.OK,
                 Retorno = playerDeserialized,
@@ -89,7 +89,7 @@ namespace LeaderboardPlayersAPI.Services
 
             var oderedPlayers = playersDeserialized.OrderByDescending(it => it.points).ToList();
 
-            return new ServiceResponse<List<Player>>
+            return new ServiceResponse<List<Player>> // This should be done on the Application layer wich is the controller.
             {
                 StatusCode = oderedPlayers.Count > 0 ? HttpStatusCode.OK : HttpStatusCode.NoContent,
                 Retorno = oderedPlayers,
@@ -98,7 +98,7 @@ namespace LeaderboardPlayersAPI.Services
 
         public ServiceResponse<Player> UpdatePlayer(Player player)
         {
-            if (string.IsNullOrWhiteSpace(player.id.ToString()))
+            if (string.IsNullOrWhiteSpace(player.id.ToString())) // This should be done on the Application layer wich is the controller.
             {
                 return new ServiceResponse<Player>
                 {
@@ -112,7 +112,7 @@ namespace LeaderboardPlayersAPI.Services
             var isUpdated = _redisManager.Update(player.id.ToString(), deserializedPlayer).Result;
             if (!isUpdated)
             {
-                return new ServiceResponse<Player>
+                return new ServiceResponse<Player> // This should be done on the Application layer wich is the controller.
                 {
                     StatusCode = HttpStatusCode.BadRequest,
                     Retorno = player,
@@ -120,7 +120,7 @@ namespace LeaderboardPlayersAPI.Services
                 };
             }
 
-            return new ServiceResponse<Player>
+            return new ServiceResponse<Player> // This should be done on the Application layer wich is the controller.
             {
                 StatusCode = HttpStatusCode.OK,
                 Retorno = player,
@@ -132,7 +132,7 @@ namespace LeaderboardPlayersAPI.Services
         {
             if (string.IsNullOrWhiteSpace(id.ToString()))
             {
-                return new ServiceResponse<bool>
+                return new ServiceResponse<bool> // This should be done on the Application layer wich is the controller.
                 {
                     StatusCode = HttpStatusCode.BadRequest,
                     Retorno = false,
@@ -143,7 +143,7 @@ namespace LeaderboardPlayersAPI.Services
             var playerDeleted = _redisManager.Delete(id.ToString()).Result;
             if (!playerDeleted)
             {
-                return new ServiceResponse<bool>
+                return new ServiceResponse<bool> // This should be done on the Application layer wich is the controller.
                 {
                     StatusCode = HttpStatusCode.BadRequest,
                     Retorno = playerDeleted,
@@ -151,7 +151,7 @@ namespace LeaderboardPlayersAPI.Services
                 };
             }
 
-            return new ServiceResponse<bool>
+            return new ServiceResponse<bool> // This should be done on the Application layer wich is the controller.
             {
                 StatusCode = HttpStatusCode.OK,
                 Retorno = playerDeleted,
