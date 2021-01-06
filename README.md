@@ -31,9 +31,7 @@
 
 ## Usabilidade
 
-```sh
-Inicialmente é necessário rodar o redis localmente na porta padrão('localhost:6379'). Caso queira rodar em outra porta será necessário alterar a variavel RedisConnection no arquivo de configuração 'appsettings.json'. Tendo isso configurado somente será executar a api ou pelo visual studio ou rodando o comando 'dotnet watch run' dentro da pasta 'LeaderBoardPlayersAPI'.
-```
+> Inicialmente é necessário rodar o redis localmente na porta padrão(**localhost:6379**). Caso queira rodar em outra porta será necessário alterar a variavel RedisConnection no arquivo de configuração **appsettings.json**. Tendo isso configurado somente será executar a api ou pelo visual studio ou rodando o comando **dotnet watch run** dentro da pasta **LeaderBoardPlayersAPI**.
 
 ## Documentação do postman
 
