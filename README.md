@@ -2,7 +2,7 @@
 
 | Postman Documentation |              
 | :------------------------: | 
-| ![](./assets/documentation_leaderboard_api.png.png) |
+| ![](./assets/documentation_leaderboard_api.png) |
 
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
